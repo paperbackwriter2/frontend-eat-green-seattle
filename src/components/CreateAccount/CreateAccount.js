@@ -15,6 +15,21 @@ export default function CreateAccount() {
 
     // const { signup } = useAuth()
 
+    const [formData, setFormData] = React.useState(
+        {firstName: '', lastName: '', email: '', password: ''}
+    )
+
+    console.log(formData)
+
+    function handleChangeEvent(e) {
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
 
     return(
         <div className='login-wrapper'>
@@ -24,19 +39,27 @@ export default function CreateAccount() {
             <form>
                 <label>
                     <p>First name</p>
-                    <input type='text' />
+                    <input type='text' 
+                        name='firstName'
+                        onChange={handleChangeEvent}/>
                 </label>
                 <label>
                     <p>Last name</p>
-                    <input type='text' />
+                    <input type='text' 
+                        name='lastName' 
+                        onChange={handleChangeEvent}/>
                 </label>
                 <label>
                     <p>Email address</p>
-                    <input type='text' />
+                    <input type='text' 
+                        name='email'
+                        onChange={handleChangeEvent}/>
                 </label>
                 <label>
                     <p>Password</p>
-                    <input type='text' />
+                    <input type='text' 
+                        name='password'
+                        onChange={handleChangeEvent}/>
                 </label>
                 <div>
                     <button type='submit'>Submit</button>
