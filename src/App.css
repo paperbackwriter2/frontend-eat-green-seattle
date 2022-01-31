@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.radish {
+  width: 200px;
+  height: 300px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
