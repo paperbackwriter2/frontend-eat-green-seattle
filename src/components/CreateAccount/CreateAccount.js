@@ -1,6 +1,7 @@
 import React from 'react';
 import { auth } from '../../firebase-config'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import './CreateAccount.css'
 
 export default function CreateAccount() {
     const [formData, setFormData] = React.useState(
@@ -47,7 +48,7 @@ export default function CreateAccount() {
 
 
     return(
-        <div className='login-wrapper'>
+        <div className='register-wrapper'>
             <h1>Create a new account</h1>
             <br />
             <form onSubmit={handleSubmit}>
