@@ -1,21 +1,25 @@
 import { Outlet, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import Navbar from './components/Navbar/Navbar'
+import Login from './components/Login/Login'
+import Homepage from './components/Homepage/Homepage'
+import Browse from './components/Browse/Browse'
+import About from './components/About/About'
+import CreateAccount from './components/CreateAccount/CreateAccount';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <Navbar />
-      <div className="content">
-        <h1>Eat Green Seattle</h1>
-        <p>Support small, local farmers and regenerative agriculture.</p>
-        <img className='radish' alt='radish with leaves' src='https://images.pexels.com/photos/4117702/pexels-photo-4117702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'></img>
-        {/* <img src='https://images.pexels.com/photos/6280399/pexels-photo-6280399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'></img>; */}
-
-      </div>
-      <Outlet></Outlet>
-    </div>
+      <Routes>
+        <Route path='/' element={<Homepage />} />
+        <Route path='browse' element={<Browse />} />
+        <Route path='about' element={<About />} />
+        <Route path='create-account' element={<CreateAccount />} />
+      </Routes>
+    </Router>
   );
 }
 
@@ -27,3 +31,21 @@ export default App;
 <Link to="/expenses">Expenses</Link>
 </nav> */}
       {/* <Outlet ></Outlet> */}
+
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <Navbar />
+//       <div className="content">
+//         <h1>Eat Green Seattle</h1>
+//         <p>Support small, local farmers and regenerative agriculture.</p>
+//         <img className='radish' alt='radish with leaves' src='https://images.pexels.com/photos/4117702/pexels-photo-4117702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'></img>
+//         <Login />
+//         {/* <img src='https://images.pexels.com/photos/6280399/pexels-photo-6280399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'></img>; */}
+
+//       </div>
+//       <Outlet></Outlet>
+//     </div>
+//   );
+// }

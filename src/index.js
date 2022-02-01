@@ -15,22 +15,13 @@ import About from './components/About/About'
 import CreateAccount from './components/CreateAccount/CreateAccount'
 import { AuthProvider } from './contexts/AuthContext'
 
+import Navbar from './components/Navbar/Navbar'
+
 // import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-       <Route path='/' element={<App />}> 
-       <Route path='login' element={<Login />}/>
-       <Route path='browse' element={<Browse />} />
-       <Route path='about' element={<About />} />
-       {/* <Route path='add-farm' element={AddFarm} /> */}
-       <Route path='create-account' element={<CreateAccount/>} />
-       </Route>
-   </Routes>
- </BrowserRouter>
-    
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -51,3 +42,27 @@ ReactDOM.render(
     </main>
   }
   /> */}
+
+
+  // ReactDOM.render(
+  //   <React.StrictMode>
+  //     <BrowserRouter>
+  //       <Navbar>
+  //       <Routes>
+         
+  //        <Route path='/' element={<App />}> /</Route>
+  //        <Route path='login' element={<Login />}/>
+  //        <Route path='browse' element={<Browse />} />
+  //        <Route path='about' element={<About />} />
+  //        {/* <Route path='add-farm' element={AddFarm} /> */}
+  //        <Route path='create-account' element={<CreateAccount/>} />
+  //        {/* </Route> */}
+         
+  //       </Routes>
+  //       </Navbar>
+  //     </BrowserRouter>
+      
+      
+  //   </React.StrictMode>,
+  //   document.getElementById('root')
+  // );

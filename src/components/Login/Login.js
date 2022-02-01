@@ -44,6 +44,7 @@ export default function Login() {
                 <div>
                     <button type='submit'>Sign in</button>
                 </div>
+                <h5>New User? <a href='/create-account'>Create an account</a></h5>
             </form>
         </div>
     );

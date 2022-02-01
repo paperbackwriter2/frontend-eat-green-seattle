@@ -2,14 +2,7 @@ import React from 'react';
 import { Link, Outlet} from 'react-router-dom';
 
 const Navbar = () => {
-    // return (
-    //     <ul>
-    //         <li>
-    //             <a href="#">Home</a>
-    //             <a href="#">Create an Account</a>
-    //         </li>
-    //     </ul>
-    // )
+
     return (
         <div style={{ display: "flex" }}>
           <nav
@@ -27,12 +20,6 @@ const Navbar = () => {
               </Link>
               <Link 
                 style={{ display: "block", margin: '1rem 0'}}
-                to='/login'
-              >
-                 Log In
-              </Link>
-              <Link 
-                style={{ display: "block", margin: '1rem 0'}}
                 to='/browse'
               >
                  Browse CSAs 
@@ -43,12 +30,12 @@ const Navbar = () => {
               >
                  About Us
               </Link>
-              <Link 
+              {/* <Link 
                 style={{ display: "block", margin: '1rem 0'}}
-                to='/create-account'
+                to='/'
               >
-                 Create an account
-              </Link>
+                 Log In
+              </Link> */}
 
           </nav>
           {/* <Outlet /> */}
