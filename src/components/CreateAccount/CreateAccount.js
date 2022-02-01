@@ -1,27 +1,14 @@
-import React, { useRef } from 'react';
-import { Card, Form, Button } from 'react-bootstrap'
-// import { useAuth } from '../contexts/AuthContext'
-
-// function handleSubmit(e) {
-//     e.preventDefault()
-//     signup(emailRef.current.value, passwordRef.current.value)
-// }
+import React from 'react';
+import { auth } from '../../firebase-config'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default function CreateAccount() {
-
-    // const emailRef = useRef()
-    // const passwordRef = useRef()
-    // const firstNameRef = useRef()
-
-    // const { signup } = useAuth()
-
     const [formData, setFormData] = React.useState(
         {
             firstName: '', 
             lastName: '', 
             email: '', 
             password: '',
-            isFarmer: false,
             accountType: ''
         }
     )
@@ -29,20 +16,33 @@ export default function CreateAccount() {
     // console.log(formData)
 
     function handleChangeEvent(e) {
-        const {name, value, type, checked} = e.target
+        const {name, value} = e.target
         setFormData(prevFormData => {
             return {
                 ...prevFormData,
-                [name]: (type === 'checkbox' ? checked : value)
+                [name]: value
             }
         })
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        return console.log(formData)
-        // return console.log(`My form: ${formData}`)
-        // send POST request to API to create account in db
+        // console.log(formData)
+        // send POST request to create account 
+        const email = formData.email;
+        const password = formData.password;
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+
     }
 
 
@@ -101,12 +101,3 @@ export default function CreateAccount() {
         </div> 
     );
 };
-
-{/* <input
-type='checkbox'
-id='isFarmer'
-checked={formData.isFarmer}
-onChange={handleChangeEvent}
-name='isFarmer'
-/>
-<label htmlFor='isFarmer'>Are you a farmer/producer?</label> */}
