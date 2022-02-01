@@ -1,4 +1,5 @@
 import React from 'react';
+import './Browse.css'
 // This is going to display a bunch of components that 
 // individually load info from farms
 
