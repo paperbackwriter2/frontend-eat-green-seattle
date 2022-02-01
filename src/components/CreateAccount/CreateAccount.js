@@ -16,51 +16,84 @@ export default function CreateAccount() {
     // const { signup } = useAuth()
 
     const [formData, setFormData] = React.useState(
-        {firstName: '', lastName: '', email: '', password: ''}
+        {
+            firstName: '', 
+            lastName: '', 
+            email: '', 
+            password: '',
+            isFarmer: false,
+            accountType: ''
+        }
     )
 
-    console.log(formData)
+    // console.log(formData)
 
     function handleChangeEvent(e) {
+        const {name, value, type, checked} = e.target
         setFormData(prevFormData => {
             return {
                 ...prevFormData,
-                [e.target.name]: e.target.value
+                [name]: (type === 'checkbox' ? checked : value)
             }
         })
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        return console.log(formData)
+        // return console.log(`My form: ${formData}`)
+        // send POST request to API to create account in db
     }
 
 
     return(
         <div className='login-wrapper'>
             <h1>Create a new account</h1>
-            <button>I want to join a CSA</button>
-            <button>I'm a farmer</button>
-            <form>
-                <label>
-                    <p>First name</p>
-                    <input type='text' 
-                        name='firstName'
-                        onChange={handleChangeEvent}/>
-                </label>
-                <label>
-                    <p>Last name</p>
-                    <input type='text' 
-                        name='lastName' 
-                        onChange={handleChangeEvent}/>
-                </label>
-                <label>
-                    <p>Email address</p>
-                    <input type='text' 
-                        name='email'
-                        onChange={handleChangeEvent}/>
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input type='text' 
-                        name='password'
-                        onChange={handleChangeEvent}/>
-                </label>
+            <br />
+            <form onSubmit={handleSubmit}>
+                <input 
+                    type='text'
+                    placeholder='First name' 
+                    name='firstName'
+                    onChange={handleChangeEvent}
+                    value={formData.firstName}
+                />
+                <br />
+                <input 
+                    type='text'
+                    placeholder='Last name' 
+                    name='lastName'
+                    onChange={handleChangeEvent}
+                    value={formData.lastName}
+                />
+                <br />
+                <input 
+                    type='text'
+                    placeholder='E-mail'
+                    name='email'
+                    onChange={handleChangeEvent}
+                    value={formData.email}
+                />
+                <br />
+                <input
+                    type='text'
+                    placeholder='Password'
+                    name='password'
+                    onChange={handleChangeEvent}
+                    value={formData.password}
+                />
+                <br />
+                <br />
+                <label htmlFor='accountType'>Select account type:</label>
+                <select
+                    id='accountType'
+                    value={formData.accountType}
+                    onChange={handleChangeEvent}
+                    name='accountType'
+                >
+                    <option value='Farmer'>Farmer</option>
+                    <option value='Consumer'>Consumer</option>
+                </select>
                 <div>
                     <button type='submit'>Submit</button>
                 </div>
@@ -69,30 +102,11 @@ export default function CreateAccount() {
     );
 };
 
-
-
-{/* <>
-<Card>
-    <Card.Body>
-       <h2 className='text-center mb-4'>Create Account</h2>
-       <Form>
-           <Form.Group id='email'>
-                <Form.Label>Email</Form.Label>
-                <Form.Control type='email' ref={emailRef} required />
-           </Form.Group>
-           <Form.Group id='password'>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type='password' ref={passwordRef} required />
-           </Form.Group>
-           <Form.Group id='firstName'>
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type='firstName' ref={firstNameRef} required />
-           </Form.Group>
-           <Button className='w-100' type='submit'>Create My Account</Button>
-       </Form>
-    </Card.Body>
-</Card>
-<div className="w-100 text-center mt-2">
-    Already have an account? Log In
-</div>
-</> */}
+{/* <input
+type='checkbox'
+id='isFarmer'
+checked={formData.isFarmer}
+onChange={handleChangeEvent}
+name='isFarmer'
+/>
+<label htmlFor='isFarmer'>Are you a farmer/producer?</label> */}
