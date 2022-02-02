@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import Login from '../Login/Login';
 import './Homepage.css';
 import { UserContext } from '../../UserContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Homepage() {
-    const {user, setUser} = useContext(UserContext)
+    const {user, setUser} = useAuth();
+    // const user = 'bob'
     return (
 
     <div className="centered">

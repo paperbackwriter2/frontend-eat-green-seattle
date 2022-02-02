@@ -2,7 +2,7 @@ import { Outlet, Link } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { UserContext } from './UserContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './App.css';
 import Navbar from './components/Navbar/Navbar'
@@ -12,23 +12,31 @@ import Browse from './components/Browse/Browse'
 import About from './components/About/About'
 import CreateAccount from './components/CreateAccount/CreateAccount';
 import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
+import { app } from './firebase-config';
+import { AuthProvider } from './contexts/AuthContext'
 
 function App() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+
+  // useEffect(() => {
+  //   app.auth().onAuthStateChanged(setUser);
+  // }, []);
 
   return (
-    <Router>
-      <UserContext.Provider value={ {user, setUser}}>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='browse' element={<Browse />} />
-          <Route path='about' element={<About />} />
-          <Route path='create-account' element={<CreateAccount />} />
-          <Route path='customer-dashboard' element={<CustomerDashboard />} />
-        </Routes>
-      </UserContext.Provider>
-    </Router>
+    <AuthProvider>
+      <Router>
+        {/* <UserContext.Provider value={ {user, setUser}}> */}
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Homepage />} />
+            <Route path='browse' element={<Browse />} />
+            <Route path='about' element={<About />} />
+            <Route path='create-account' element={<CreateAccount />} />
+            <Route path='customer-dashboard' element={<CustomerDashboard />} />
+          </Routes>
+        {/* </UserContext.Provider> */}
+      </Router>
+    </AuthProvider>
   );
 }
 

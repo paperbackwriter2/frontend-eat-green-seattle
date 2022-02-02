@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
 import { UserContext } from '../../UserContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Login() {
 
-    const {user, setUser} = useContext(UserContext);
+    const {user, setUser} = useAuth();
 
     const [formData, setFormData] = useState( 
         {
@@ -16,15 +17,15 @@ export default function Login() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(formData.email, formData.password)
+        // console.log(formData.email, formData.password)
         signInWithEmailAndPassword(auth, formData.email, formData.password)
            .then((userCredential) => {
                // Signed in
                const user = userCredential.user;
-               console.log(user)
-               console.log(user.uid)
-               console.log('You are logged in!')
-               setUser(user.email)
+            //    console.log(user)
+            //    console.log(user.uid)
+            //    console.log('You are logged in!')
+            //    setUser(user.email)
            })
            .catch((error) => {
                const errorCode = error.code;

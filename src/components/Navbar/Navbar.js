@@ -4,9 +4,11 @@ import { UserContext } from '../../UserContext';
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase-config';
 import { Redirect } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext';
 
 const Navbar = () => {
-  const {user, setUser} = useContext(UserContext);
+  // const {user, setUser} = useAuth();
+  const {currentUser, signup} = useAuth()
 
   // function logOut = () => {
   //   return signOut(auth)
@@ -20,7 +22,7 @@ const Navbar = () => {
           //  const user = userCredential.user;
           //  console.log(user)
           //  console.log(user.uid)
-          setUser(null)
+          // setUser(null)
           console.log('You are logged out!')
           
           //  setUser(user.email)
@@ -41,10 +43,10 @@ const Navbar = () => {
           >
               <p>Eat Green Seattle</p>
 
-              {user
+              {currentUser
                 ? 
                 <div>
-                  <p>Logged in as {user}!</p>
+                  <p>Logged in as {currentUser}!</p>
                   <Link
                     style={{ display: "block", margin: '1rem 0'}}
                     to='customer-dashboard'
@@ -78,10 +80,11 @@ const Navbar = () => {
               >
                  About Us
               </Link>
-              {user
+              {/* {currentUser
               ? <button onClick={logOut}>Log out</button>
               : null
-              }
+              } */}
+              <button onClick={logOut}>Log out</button>
 
               {/* <Link 
                 style={{ display: "block", margin: '1rem 0'}}
