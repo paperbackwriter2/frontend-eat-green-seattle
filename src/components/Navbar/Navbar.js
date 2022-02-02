@@ -80,12 +80,11 @@ const Navbar = () => {
               >
                  About Us
               </Link>
-              {/* {currentUser
+              {currentUser
               ? <button onClick={logOut}>Log out</button>
               : null
-              } */}
-              <button onClick={logOut}>Log out</button>
-
+              }
+              
               {/* <Link 
                 style={{ display: "block", margin: '1rem 0'}}
                 to='/'
