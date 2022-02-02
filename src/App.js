@@ -1,5 +1,8 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { UserContext } from './UserContext';
+import { useState } from 'react';
 
 import './App.css';
 import Navbar from './components/Navbar/Navbar'
@@ -8,17 +11,23 @@ import Homepage from './components/Homepage/Homepage'
 import Browse from './components/Browse/Browse'
 import About from './components/About/About'
 import CreateAccount from './components/CreateAccount/CreateAccount';
+import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Homepage />} />
-        <Route path='browse' element={<Browse />} />
-        <Route path='about' element={<About />} />
-        <Route path='create-account' element={<CreateAccount />} />
-      </Routes>
+      <UserContext.Provider value={ {user, setUser}}>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='browse' element={<Browse />} />
+          <Route path='about' element={<About />} />
+          <Route path='create-account' element={<CreateAccount />} />
+          <Route path='customer-dashboard' element={<CustomerDashboard />} />
+        </Routes>
+      </UserContext.Provider>
     </Router>
   );
 }
@@ -49,3 +58,17 @@ export default App;
 //     </div>
 //   );
 // }
+
+// return (
+//   <Router>
+//     <UserContext.Provider value={ {user, setUser}}>
+//       <Navbar />
+//       <Routes>
+//         <Route path='/' element={<Homepage />} />
+//         <Route path='browse' element={<Browse />} />
+//         <Route path='about' element={<About />} />
+//         <Route path='create-account' element={<CreateAccount />} />
+//       </Routes>
+//     </UserContext.Provider>
+//   </Router>
+// );

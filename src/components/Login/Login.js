@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
+import { UserContext } from '../../UserContext';
 
 export default function Login() {
+
+    const {user, setUser} = useContext(UserContext);
+
     const [formData, setFormData] = useState( 
         {
             email: '',
@@ -18,7 +22,9 @@ export default function Login() {
                // Signed in
                const user = userCredential.user;
                console.log(user)
+               console.log(user.uid)
                console.log('You are logged in!')
+               setUser(user.email)
            })
            .catch((error) => {
                const errorCode = error.code;
