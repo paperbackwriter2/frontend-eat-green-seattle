@@ -1,7 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 import { auth } from '../../firebase-config'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './CreateAccount.css'
+
+const baseURL = 'http://localhost:5000/create-account'
 
 export default function CreateAccount() {
     const [formData, setFormData] = React.useState(
@@ -44,6 +47,12 @@ export default function CreateAccount() {
                 const errorMessage = error.message;
                 console.log(errorMessage)
             });
+        
+            axios
+                .post(baseURL, formData)
+                .then((response) => {
+                    console.log(response.data)
+                })
 
     }
 
