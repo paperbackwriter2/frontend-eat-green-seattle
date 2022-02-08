@@ -23,8 +23,8 @@ function App() {
   // }, []);
 
   return (
-    <AuthProvider>
       <Router>
+        <AuthProvider>
         {/* <UserContext.Provider value={ {user, setUser}}> */}
           <Navbar />
           <Routes>
@@ -32,11 +32,14 @@ function App() {
             <Route path='browse' element={<Browse />} />
             <Route path='about' element={<About />} />
             <Route path='create-account' element={<CreateAccount />} />
-            <Route path='customer-dashboard' element={<CustomerDashboard />} />
+            <Route path='customer-dashboard' element={<CustomerDashboard />}
+              // {currentUser ? <Redirect to="/dashboard" /> : <PublicHomePage />} 
+            />
           </Routes>
+        </AuthProvider>
         {/* </UserContext.Provider> */}
       </Router>
-    </AuthProvider>
+    // </AuthProvider>
   );
 }
 
