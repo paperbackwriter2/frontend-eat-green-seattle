@@ -13,7 +13,8 @@ export default function CreateAccount() {
             lastName: '', 
             email: '', 
             password: '',
-            accountType: ''
+            accountType: '',
+            firebase_id: ''
         }
     )
 
@@ -40,7 +41,14 @@ export default function CreateAccount() {
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                console.log(user)
+                // console.log(`this si what I get ${user.uid}`)
+                formData.firebase_id = user.uid;
+                // console.log(formData);
+                axios
+                .post(baseURL, formData)
+                .then((response) => {
+                    console.log(response.data)
+                })
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -48,11 +56,11 @@ export default function CreateAccount() {
                 console.log(errorMessage)
             });
         
-            axios
-                .post(baseURL, formData)
-                .then((response) => {
-                    console.log(response.data)
-                })
+            // axios
+            //     .post(baseURL, formData)
+            //     .then((response) => {
+            //         console.log(response.data)
+            //     })
 
     }
 
