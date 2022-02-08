@@ -12,6 +12,8 @@ import Browse from './components/Browse/Browse'
 import About from './components/About/About'
 import CreateAccount from './components/CreateAccount/CreateAccount';
 import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
+import CreateFarm from './components/CreateFarm/CreateFarm'
+import FarmDashboard from './components/FarmDashboard/FarmDashboard'
 import { app } from './firebase-config';
 import { AuthProvider } from './contexts/AuthContext'
 
@@ -35,6 +37,8 @@ function App() {
             <Route path='customer-dashboard' element={<CustomerDashboard />}
               // {currentUser ? <Redirect to="/dashboard" /> : <PublicHomePage />} 
             />
+            <Route path='create-farm' element={<CreateFarm />}/>
+            <Route path='farm-dashboard' element={<FarmDashboard />} />
           </Routes>
         </AuthProvider>
         {/* </UserContext.Provider> */}

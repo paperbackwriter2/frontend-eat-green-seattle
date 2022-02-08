@@ -8,31 +8,40 @@ import { useAuth } from '../../contexts/AuthContext';
 
 const Navbar = () => {
   // const {user, setUser} = useAuth();
-  const {currentUser, signup} = useAuth()
+  const {currentUser, setCurrentUser} = useAuth()
 
   let navigate = useNavigate();
   // function logOut = () => {
   //   return signOut(auth)
   // })
-  function logOut(e) {
+  async function logOut(e) {
     // e.preventDefault()
-    // console.log(formData.email, formData.password)
-    signOut(auth)
-       .then((userCredential) => {
-           // Signed in
-          //  const user = userCredential.user;
-          //  console.log(user)
-          //  console.log(user.uid)
-          // setUser(null)
-          console.log('You are logged out!')
+    // console.log(formData.email, formData.password)'
+    try {
+      await signOut(auth)
+      navigate('/')
+      setCurrentUser(null)
+    } catch(error) {
+      console.log(error)
+    }
+    // signOut(auth)
+    //    .then((userCredential) => {
+    //        // Signed in
+    //       //  const user = userCredential.user;
+    //       //  console.log(user)
+    //       //  console.log(user.uid)
+    //       // setUser(null)
+    //       console.log('You are logged out!')
+    //       // setCurrentUser(null)
           
-          //  setUser(user.email)
-          navigate('/')
-       })
-       .catch((error) => {
-           const errorCode = error.code;
-           const errorMessage = error.message;
-       })
+    //       //  setUser(user.email)
+    //       console.log('do we get to the end of logging out?')
+    //       navigate('/')
+    //    })
+    //    .catch((error) => {
+    //        const errorCode = error.code;
+    //        const errorMessage = error.message;
+    //    })
 }
 
     return (
