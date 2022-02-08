@@ -3,13 +3,14 @@ import { Link, Outlet} from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase-config';
-import { Redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext';
 
 const Navbar = () => {
   // const {user, setUser} = useAuth();
   const {currentUser, signup} = useAuth()
 
+  let navigate = useNavigate();
   // function logOut = () => {
   //   return signOut(auth)
   // })
@@ -26,6 +27,7 @@ const Navbar = () => {
           console.log('You are logged out!')
           
           //  setUser(user.email)
+          navigate('/')
        })
        .catch((error) => {
            const errorCode = error.code;
@@ -46,7 +48,7 @@ const Navbar = () => {
               {currentUser
                 ? 
                 <div>
-                  <p>Logged in as {currentUser}!</p>
+                  <p>Logged in as {currentUser.email}!</p>
                   <Link
                     style={{ display: "block", margin: '1rem 0'}}
                     to='customer-dashboard'
@@ -84,7 +86,7 @@ const Navbar = () => {
               ? <button onClick={logOut}>Log out</button>
               : null
               }
-              
+
               {/* <Link 
                 style={{ display: "block", margin: '1rem 0'}}
                 to='/'
