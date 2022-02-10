@@ -14,15 +14,36 @@ import CreateAccount from './components/CreateAccount/CreateAccount';
 import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
 import CreateFarm from './components/CreateFarm/CreateFarm'
 import FarmDashboard from './components/FarmDashboard/FarmDashboard'
+import NewBrowse from './components/NewBrowse/NewBrowse'
 import { app } from './firebase-config';
 import { AuthProvider } from './contexts/AuthContext'
+import axios from 'axios'
+
+
 
 function App() {
+  // const [farmList, setFarmList] = useState(null)
   // const [user, setUser] = useState(null);
 
   // useEffect(() => {
   //   app.auth().onAuthStateChanged(setUser);
   // }, []);
+  // const getFarms = ()  => {
+  //   // console.log('getting farm info')
+  //   axios 
+  //   .get(url)
+  //   .then((response) => {
+  //     const farms = response.data;
+  //     console.log(farms)
+  //     setFarmList(farms)
+  //   })
+  //   .catch((err) => {
+  //     console.log(err)
+  //   })
+  //   // return response
+  // }
+
+  // getFarms()
 
   return (
       <Router>
@@ -31,14 +52,15 @@ function App() {
           <Navbar />
           <Routes>
             <Route path='/' element={<Homepage />} />
-            <Route path='browse' element={<Browse />} />
+            <Route path='browse' element={<NewBrowse />} />
             <Route path='about' element={<About />} />
             <Route path='create-account' element={<CreateAccount />} />
             <Route path='customer-dashboard' element={<CustomerDashboard />}
               // {currentUser ? <Redirect to="/dashboard" /> : <PublicHomePage />} 
             />
-            <Route path='create-farm' element={<CreateFarm />}/>
+            <Route path='create-csa' element={<CreateFarm />}/>
             <Route path='farm-dashboard' element={<FarmDashboard />} />
+            <Route path='learn' element={<NewBrowse />} />
           </Routes>
         </AuthProvider>
         {/* </UserContext.Provider> */}
