@@ -5,12 +5,21 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase-config';
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext';
+import { nullLiteral } from '@babel/types';
+import './Navbar.css'
 
 const Navbar = () => {
   // const {user, setUser} = useAuth();
   const {currentUser, setCurrentUser} = useAuth()
 
   let navigate = useNavigate();
+  console.log(currentUser)
+  // {
+  //   currentUser.is_farm?
+  //   console.log('True')
+  //   : console.log('False')
+  // }
+  // console.log(currentUser.is_farm)
   // function logOut = () => {
   //   return signOut(auth)
   // })
@@ -57,6 +66,7 @@ const Navbar = () => {
               {currentUser
                 ? 
                 <div>
+                  <p>Am I a farmer? {currentUser.is_farm}</p>
                   <p>Logged in as {currentUser.email}!</p>
                   <Link
                     style={{ display: "block", margin: '1rem 0'}}
@@ -64,6 +74,10 @@ const Navbar = () => {
                   >
                     My Dashboard
                   </Link>
+                  <Link
+                  style={{ display: "block", margin: '1rem 0'}}
+                  to='/create-csa'
+                  > Manage my CSA</Link>  
                 </div>
                 : <Link 
                     style={{ display: "block", margin: '1rem 0'}}
@@ -72,6 +86,13 @@ const Navbar = () => {
                     Home 
                   </Link>
               }
+              {/* {currentUser.is_farm?
+                <Link
+                style={{ display: "block", margin: '1rem 0'}}
+                to='/create-csa'
+                > Manage my CSA</Link>  
+                : null
+            } */}
 
               {/* <Link 
                 style={{ display: "block", margin: '1rem 0'}}
