@@ -4,13 +4,15 @@ import { auth } from '../../firebase-config'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './CreateFarm.css'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext';
 
 const baseURL = 'http://localhost:5000/new-farm'
 
 
 export default function CreateAccount() {
     const navigate = useNavigate();
-    
+    const { currentUser } = useAuth()
+
     const [formData, setFormData] = React.useState(
         {
             farmName: '',
@@ -28,6 +30,10 @@ export default function CreateAccount() {
             farm_bio: '',
             organic: '',
             firebase_id: '',
+            customer_id: [],
+            max_shares: 0,
+            user_id: currentUser.id,
+            email: currentUser.email
         }
     )
 
@@ -43,6 +49,15 @@ export default function CreateAccount() {
         })
     }
 
+    function createCSA(formData) {
+        axios
+            .post(baseURL, formData)
+            .then((response) => {
+                console.log(response.data)
+            })
+            // navigate('/farm-dashboard')
+    };
+
     function handleSubmit(e) {
         e.preventDefault()
         // console.log(formData)
@@ -51,26 +66,29 @@ export default function CreateAccount() {
         const password = formData.password;
 
         console.log(`organic: ${formData.organic}`)
+        createCSA(formData);
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                // console.log(`this si what I get ${user.uid}`)
-                formData.firebase_id = user.uid;
-                // console.log(formData);
-                axios
-                .post(baseURL, formData)
-                .then((response) => {
-                    console.log(response.data)
-                })
-                navigate('/farm-dashboard')
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage)
-            });
+        
+
+        // createUserWithEmailAndPassword(auth, email, password)
+        //     .then((userCredential) => {
+        //         // Signed in
+        //         const user = userCredential.user;
+        //         // console.log(`this si what I get ${user.uid}`)
+        //         formData.firebase_id = user.uid;
+        //         // console.log(formData);
+        //         axios
+        //         .post(baseURL, formData)
+        //         .then((response) => {
+        //             console.log(response.data)
+        //         })
+        //         navigate('/farm-dashboard')
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         console.log(errorMessage)
+        //     });
         
             // axios
             //     .post(baseURL, formData)
@@ -83,7 +101,7 @@ export default function CreateAccount() {
 
     return(
         <div className='register-wrapper'>
-            <h1>Create a new account</h1>
+            <h1>Add your CSA</h1>
             <br />
             <form onSubmit={handleSubmit}>
                 <input 
@@ -96,7 +114,7 @@ export default function CreateAccount() {
                 <br />
                 <input 
                     type='text'
-                    placeholder='First name' 
+                    placeholder='Owner First name' 
                     name='firstName'
                     onChange={handleChangeEvent}
                     value={formData.firstName}
@@ -104,27 +122,26 @@ export default function CreateAccount() {
                 <br />
                 <input 
                     type='text'
-                    placeholder='Last name' 
+                    placeholder='Owner Last name' 
                     name='lastName'
                     onChange={handleChangeEvent}
                     value={formData.lastName}
                 />
-                <br />
+                {/* <br />
                 <input 
                     type='text'
                     placeholder='E-mail'
                     name='email'
                     onChange={handleChangeEvent}
                     value={formData.email}
-                />
-                <br />
-                <input
+                /> */}
+                {/* <input
                     type='text'
                     placeholder='Password'
                     name='password'
                     onChange={handleChangeEvent}
                     value={formData.password}
-                />
+                /> */}
                 <br />
                 <input
                     type='text'
@@ -193,6 +210,14 @@ export default function CreateAccount() {
                     <option value={true}>Yes</option>
                     <option value={false}>No</option>
                 </select>
+                <br />
+                <input
+                    type='text'
+                    placeholder='Number of Shares Available'
+                    name='max_shares'
+                    onChange={handleChangeEvent}
+                    value={formData.max_shares}
+                />
                 <div>
                     <button type='submit'>Submit</button>
                 </div>

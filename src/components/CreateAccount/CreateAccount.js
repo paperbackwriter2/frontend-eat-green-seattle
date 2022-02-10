@@ -3,23 +3,30 @@ import axios from 'axios';
 import { auth } from '../../firebase-config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './CreateAccount.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 const baseURL = 'http://localhost:5000/create-account'
 
 export default function CreateAccount() {
+    let navigate = useNavigate();
+    const { currentUser, setCurrentUser } = useAuth()
     const [formData, setFormData] = React.useState(
         {
+            email: '',
             firstName: '', 
             lastName: '', 
-            email: '', 
             password: '',
-            accountType: '',
             firebase_id: '',
             zipcode: '',
-            phone: ''
+            phone: '',
+            is_farm: false,
+            csa_id: null,
+            farm_id: null
         }
     )
+    
+
 
     // console.log(formData)
 
@@ -50,8 +57,21 @@ export default function CreateAccount() {
                 axios
                 .post(baseURL, formData)
                 .then((response) => {
+                    console.log('user created successfully')
                     console.log(response.data)
+                    const userProfile = response.data
+                    console.log('this is where I should be settingCurrentUser')
+                    // setCurrentUser({
+                    //     email: userProfile.email,
+                    //     uid: userProfile.firebase_id,
+                    //     first_name: userProfile.first_name,
+                    //     last_name: userProfile.last_name,
+                    //     created_at: userProfile.created_at
+                    //     })
                 })
+                
+                navigate('/')
+
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -90,14 +110,15 @@ export default function CreateAccount() {
                     value={formData.lastName}
                 />
                 <br />
-                <input 
+                <input
                     type='text'
-                    placeholder='E-mail'
+                    placeholder='E-mail Address'
                     name='email'
                     onChange={handleChangeEvent}
                     value={formData.email}
                 />
                 <br />
+
                 <input
                     type='text'
                     placeholder='Password'
@@ -109,7 +130,7 @@ export default function CreateAccount() {
                 <input
                     type='text'
                     placeholder='Zipcode'
-                    name='Zipcode'
+                    name='zipcode'
                     onChange={handleChangeEvent}
                     value={formData.zipcode}
                 />
@@ -122,17 +143,17 @@ export default function CreateAccount() {
                     value={formData.phone}
                 />
                 <br />
-                <br />
-                {/* <label htmlFor='accountType'>Select account type:</label> */}
-                {/* <select
-                    id='accountType'
-                    value={formData.accountType}
+                <label htmlFor='is_farm'>Select account type:</label>
+                <select
+                    id='is_farm'
+                    value={formData.is_farm}
                     onChange={handleChangeEvent}
-                    name='accountType'
+                    name='is_farm'
                 >
-                    <option value='Farmer'>Farmer</option>
-                    <option value='Consumer'>Consumer</option>
-                </select> */}
+                    <option >--Select--</option>
+                    <option value={false}>Customer</option>
+                    <option value={true}>Farmer</option>
+                </select>
                 <div>
                     <button type='submit'>Submit</button>
                 </div>
