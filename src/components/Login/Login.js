@@ -59,7 +59,7 @@ export default function Login() {
                 />
                 <br />
                 <input
-                    type='text'
+                    type='password'
                     placeholder='Password'
                     name='password'
                     onChange={handleChange}
