@@ -134,14 +134,18 @@ export const AuthProvider = ({ children }) => {
                     uid: userProfile.firebase_id,
                     first_name: userProfile.first_name,
                     last_name: userProfile.last_name,
-                    created_at: userProfile.created_at
+                    created_at: userProfile.created_at,
+                    is_farm: userProfile.is_farm,
+                    csa_id: userProfile.csa_id,
+                    farm_id: userProfile.csa_id,
+                    id: userProfile._id
                     })
                 } catch (error) {
                     console.log(error)
                 }
             }
         )
-        return unsubscribe
+        return unsubscribe;
         }, []);
             
     //         user =>{
