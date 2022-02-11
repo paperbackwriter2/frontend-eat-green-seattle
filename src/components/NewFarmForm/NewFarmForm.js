@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth } from '../../contexts/AuthContext';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const baseURL = 'http://localhost:5000/new-farm'
 
@@ -116,7 +117,7 @@ export default function SignUp() {
             {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Add Your Farm and CSA Information Below:
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>

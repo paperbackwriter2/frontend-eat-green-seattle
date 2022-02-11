@@ -78,7 +78,7 @@ const NewBrowse = () => {
                     <div>
                         <Grid container spacing={2} justifyContent='center'>
                             <Grid item>
-                                <Button variant='contained' color='primary'>
+                                <Button onClick={()=> navigate('/about')}variant='contained' color='primary'>
                                     Learn More
                                 </Button>
                             </Grid>
@@ -101,8 +101,9 @@ const NewBrowse = () => {
                             // sx={{
                             //     pt: '56.25%'
                             // }}
-                            height='140'
-                            image='https://source.unsplash.com/random'
+                            height='200'
+                            // image='https://source.unsplash.com/random'
+                            image='https://images.pexels.com/photos/1486976/pexels-photo-1486976.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
                             title='Image Title'
                             />
                             <CardContent >
