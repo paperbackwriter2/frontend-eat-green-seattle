@@ -4,7 +4,8 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { spacing } from '@mui/system';
 import axios from 'axios'
-
+import { useNavigate } from 'react-router-dom';
+ 
 
 const url = 'http://localhost:5000/get-all-farms'
 
@@ -26,6 +27,7 @@ const url = 'http://localhost:5000/get-all-farms'
 
 const NewBrowse = () => {
     // const classes = useStyles();
+    const navigate = useNavigate();
     const [farmList, setFarmList] = useState([{farm_name: 'loading Farms'}])
     // const [isLoading, setLoading] = useState(true);
 
@@ -92,8 +94,8 @@ const NewBrowse = () => {
             <Container maxWidth='md' sx={{ my: '50px'}}>
                 <Grid container spacing={4} >
                     {farmList.map((card) => (
-                        <Grid item>
-                        <Card>
+                        <Grid item sx={{ width: '100%'}}>
+                        <Card >
                             <CardMedia
                             component='img'
                             // sx={{
@@ -103,16 +105,25 @@ const NewBrowse = () => {
                             image='https://source.unsplash.com/random'
                             title='Image Title'
                             />
-                            <CardContent>
+                            <CardContent >
                                 <Typography variant='h5' gutterBottom>
                                     {card.farm_name}
                                 </Typography>
                                 <Typography>
                                     Location: {card.city}, WA
                                 </Typography>
+                                <Typography>
+                                    {card.farm_bio}
+                                </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size='small' color='primary'>Learn more</Button>
+                                <Button 
+                                    size='small' 
+                                    color='primary'
+                                    onClick={()=>{navigate(`/profile/${card._id}`)}}
+                                >
+                                    Learn more
+                                </Button>
                             </CardActions>
                         </Card>
                     </Grid>

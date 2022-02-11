@@ -15,6 +15,9 @@ import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard'
 import CreateFarm from './components/CreateFarm/CreateFarm'
 import FarmDashboard from './components/FarmDashboard/FarmDashboard'
 import NewBrowse from './components/NewBrowse/NewBrowse'
+import FarmProfile from './components/FarmProfile/FarmProfile'
+import NewFarmForm from './components/NewFarmForm/NewFarmForm'
+
 import { app } from './firebase-config';
 import { AuthProvider } from './contexts/AuthContext'
 import axios from 'axios'
@@ -58,9 +61,13 @@ function App() {
             <Route path='customer-dashboard' element={<CustomerDashboard />}
               // {currentUser ? <Redirect to="/dashboard" /> : <PublicHomePage />} 
             />
-            <Route path='create-csa' element={<CreateFarm />}/>
+            {/* <Route path='create-csa' element={<CreateFarm />}/> */}
+            <Route path='create-csa' element={<NewFarmForm />}/>
+
             <Route path='farm-dashboard' element={<FarmDashboard />} />
             <Route path='learn' element={<NewBrowse />} />
+            <Route path='profile/:farm_id' element={<FarmProfile />} />
+            {/* <Route path='*' element={ErrorPage}></Route> */}
           </Routes>
         </AuthProvider>
         {/* </UserContext.Provider> */}
