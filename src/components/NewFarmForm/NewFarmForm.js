@@ -34,13 +34,14 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-    // const { currentUser } = useAuth();
+    const { currentUser } = useAuth();
+    // console.log
 
     const [formData, setFormData] = React.useState({
         farmName: '',
         firstName: '', 
         lastName: '', 
-        email: '', 
+        // email: '', 
         password: '',
         address_1: '',
         address_2: '',
@@ -50,12 +51,12 @@ export default function SignUp() {
         zipcode: '',
         phone: '',
         farm_bio: '',
-        organic: '',
+        organic: false,
         firebase_id: '',
         customer_id: [],
         max_shares: 0,
         // user_id: currentUser.id,
-        // email: currentUser.email
+        email: currentUser.email
     }
     );
 
@@ -76,6 +77,9 @@ export default function SignUp() {
                 console.log(response.data)
             })
             // navigate('/farm-dashboard')
+            .catch((err) => {
+                console.log(err.message)
+              })
     };
 
     function handleSubmit(e) {
@@ -86,7 +90,7 @@ export default function SignUp() {
         const password = formData.password;
 
         console.log(`organic: ${formData.organic}`)
-        // createCSA(formData);
+        createCSA(formData);
         console.log(formData)
     }
 
@@ -159,7 +163,7 @@ export default function SignUp() {
                     value={formData.farmName}
                     />
                 </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -170,7 +174,7 @@ export default function SignUp() {
                   onChange={handleChangeEvent}
                   value={formData.email}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -268,7 +272,10 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox color="primary" />}
+                  control={<Checkbox 
+                            onChange={e => {formData.organic = !formData.orgnaic
+                                            console.log(formData.organic)}}
+                            color="primary" />}
                   label="My farm is certified organic."
                 />
               </Grid>
@@ -283,9 +290,9 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                {/* <Link href="#" variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </Link> */}
               </Grid>
             </Grid>
           </Box>
