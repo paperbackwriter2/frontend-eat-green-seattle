@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, Outlet} from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import { signOut } from 'firebase/auth'
@@ -10,10 +10,31 @@ import './Navbar.css'
 
 const Navbar = () => {
   // const {user, setUser} = useAuth();
+  // const [isLoading, setIsLoading] = useState(true)
   const {currentUser, setCurrentUser} = useAuth()
+  // const isFarm = currentUser.isFarm;
+  // const [user, setUser] = useState();
+  // setUser(currentUser);
+  
 
   let navigate = useNavigate();
   console.log(currentUser)
+  console.log(currentUser.is_farm)
+  
+  // console.log(isFarm)
+  // console.log(`user ${user}`)
+
+  // useEffect(() => {
+  // //   const {currentUser, setCurrentUser} = useAuth()
+  // // const [user, setUser] = useState();
+  //   setUser(currentUser)
+  //   setIsLoading(false)
+  
+  //   // return () => {
+  //   //   second
+  //   // }
+  // }, [])
+  
   // {
   //   currentUser.is_farm?
   //   console.log('True')
@@ -29,7 +50,7 @@ const Navbar = () => {
     try {
       await signOut(auth)
       navigate('/')
-      setCurrentUser(null)
+      setCurrentUser({first_name: null})
     } catch(error) {
       console.log(error)
     }
@@ -63,21 +84,21 @@ const Navbar = () => {
           >
               <p>Eat Green Seattle</p>
 
-              {currentUser
+              {currentUser.email
                 ? 
                 <div>
-                  <p>Am I a farmer? {currentUser.is_farm}</p>
+                  <p>Am I a farmer? {currentUser.is_farm.toString()}</p>
                   <p>Logged in as {currentUser.email}!</p>
-                  <Link
+                  {/* <Link
                     style={{ display: "block", margin: '1rem 0'}}
                     to='customer-dashboard'
                   >
                     My Dashboard
-                  </Link>
-                  <Link
+                  </Link> */}
+                  {/* <Link
                   style={{ display: "block", margin: '1rem 0'}}
                   to='/create-csa'
-                  > Manage my CSA</Link>  
+                  > Manage my CSA</Link>   */}
                 </div>
                 : <Link 
                     style={{ display: "block", margin: '1rem 0'}}
@@ -86,13 +107,57 @@ const Navbar = () => {
                     Home 
                   </Link>
               }
+
+
+              {/* THESE ARE WORKING */}
+              {!currentUser.is_farm && currentUser.zipcode?
+                <Link
+                style={{ display: "block", margin: '1rem 0'}}
+                to='customer-dashboard'
+                >
+                My Dashboard
+                </Link>
+                : null}
+
+              {currentUser.is_farm?
+                <Link
+                style={{ display: "block", margin: '1rem 0'}}
+                to='farm-dashboard'
+                >
+                My Dashboard
+                </Link>
+                : null}
+
+              {currentUser.is_farm?
+                <Link
+                style={{ display: "block", margin: '1rem 0'}}
+                to='/create-csa'
+                > Register a CSA</Link>  
+                : <></>
+              }
+
+{currentUser.is_farm?
+                <Link
+                style={{ display: "block", margin: '1rem 0'}}
+                to='#'
+                > Farmer Resources</Link>  
+                : <></>
+              }
+
+
+
+
+
+
+
+              
               {/* {currentUser.is_farm?
                 <Link
                 style={{ display: "block", margin: '1rem 0'}}
                 to='/create-csa'
-                > Manage my CSA</Link>  
-                : null
-            } */}
+                > Register a CSA</Link>  
+                : <></>
+              } */}
 
               {/* <Link 
                 style={{ display: "block", margin: '1rem 0'}}
@@ -112,7 +177,7 @@ const Navbar = () => {
               >
                  About Us
               </Link>
-              {currentUser
+              {currentUser.email
               ? <button onClick={logOut}>Log out</button>
               : null
               }
