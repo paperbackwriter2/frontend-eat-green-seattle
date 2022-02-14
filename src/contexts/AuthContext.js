@@ -71,9 +71,12 @@ const logProfile = async (userEmail) => {
 
 // logHi();
 
+// first_name: 'Bob'
+
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState({first_name: 'Bob'});
+    const [isLoading, setLoading] = useState(true)
     // const [userProfile, setUserProfile] = useState(null);
     // const [pending, setPending] = useState(true);
 
@@ -123,9 +126,9 @@ export const AuthProvider = ({ children }) => {
             async (user) => {
                 try {
                     const userData = await getProfile(user.email);
-                    console.log(`this is my userData ${userData.data}`)
-                    console.log(userData.data)
-                    console.log(`inside user`)
+                    // console.log(`this is my userData ${userData.data}`)
+                    // console.log(userData.data)
+                    // console.log(`inside user`)
                     // console.log(userData.first_name)
                     // setCurrentUser(userData.email)
                     const userProfile = userData.data;
@@ -136,10 +139,15 @@ export const AuthProvider = ({ children }) => {
                     last_name: userProfile.last_name,
                     created_at: userProfile.created_at,
                     is_farm: userProfile.is_farm,
-                    csa_id: userProfile.csa_id,
-                    farm_id: userProfile.csa_id,
-                    id: userProfile._id
+                    // csa_id: userProfile.csa_id,
+                    farm_id: userProfile.farm,
+                    id: userProfile._id,
+                    phone: userProfile.phone,
+                    zipcode: userProfile.zipcode,
+                    created_at: userProfile.created_at,
+                    farm: userProfile.farm
                     })
+                    setLoading(false)
                 } catch (error) {
                     console.log(error)
                 }
@@ -207,7 +215,8 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         currentUser,
-        setCurrentUser
+        setCurrentUser,
+        isLoading
       }}
     >
       {children}
