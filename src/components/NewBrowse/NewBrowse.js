@@ -1,28 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, AppBar, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@mui/material';
+import { 
+    Typography, 
+    AppBar, 
+    Card, 
+    CardActions, 
+    CardContent, 
+    CardMedia, 
+    CssBaseline, 
+    Grid, Toolbar, 
+    Container 
+} from '@mui/material';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { spacing } from '@mui/system';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
- 
+import { useAuth } from '../../contexts/AuthContext'; 
+import Link from '@mui/material/Link';
 
 const url = 'http://localhost:5000/get-all-farms'
 
-// const cards = [
-//     {
-//         farm_name:'Happy Farm',
-//         city: 'Duvall'
-//     },
-//     {
-//         farm_name:'Windy Farm',
-//         city: 'Monroe'
-//     },
-//     {
-//         farm_name:'Family Ranch',
-//         city: 'Woodinville'
-//     }
-//     ]
+
+function Copyright(props) {
+    return (
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'Copyright © '}
+        <Link color="inherit" href="/">
+          Eat Green Seattle
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
 
 
 const NewBrowse = () => {
@@ -72,8 +82,7 @@ const NewBrowse = () => {
                         Find Local Farms
                     </Typography>
                     <Typography variant='h5' align='center' color='textSecondary' paragraph>
-                        Hello everyone. This is where you can search for different farms.
-                        Support your local farmers and producers!
+                        Find small, local farms committed to the best for their communities and their planet.
                     </Typography>
                     <div>
                         <Grid container spacing={2} justifyContent='center'>
@@ -131,6 +140,7 @@ const NewBrowse = () => {
                     ))}
                     
                 </Grid>
+                <Copyright sx={{ mt: 5 }} />
             </Container>
 
         </main>

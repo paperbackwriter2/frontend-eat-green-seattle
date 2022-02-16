@@ -6,6 +6,8 @@ import { Typography, AppBar, Card, CardActions, CardContent, CardMedia, CssBasel
 import Button from '@mui/material/Button';
 import { Link } from '@mui/material';
 import { useAuth } from '../../contexts/AuthContext'
+import CircularProgress from '@mui/material/CircularProgress'
+import Box from '@mui/material/Box'
 
 const url = 'http://localhost:5000/get-farm'
 const subscribeURL = 'http://localhost:5000/subscribe'
@@ -43,10 +45,15 @@ const FarmProfile = () => {
         //   setLoading(false)
         //   console.log(`this is farmList ${farmList}`)
         //   console.log(currentUser)
+          window.location.reload(false);
+        //   navigate('/customer-dashboard')
         })
+            
+        //   navigate('/customer-dashboard')
         .catch((err) => {
           console.log(err.message)
         })
+        navigate('/customer-dashboard')
         // return farm
         // console.log(`this is farm: ${farm}`)
     }
@@ -116,23 +123,30 @@ const FarmProfile = () => {
 
     // )
     if (isLoading) {
-        return <div>Loading farms... {farm_id}</div>
+        return (
+            <div style={{ justifyContent:'center', textAlign:'center'}}>
+                <h2>Loading farm profile</h2>
+                <Box sx={{align:'center', display: 'flex' }}>
+                    <CircularProgress />
+                </Box>
+            </div>
+        )
     }
 
     return (
-        <div style={{justifyContent:'center', textAlign:'center', }}>
+        <Container sx={{mt: 20, justifyContent:'center', textAlign:'center', }}>
             {/* <Button variant='contained' style={{marginBottom:'50px'}}>Join this CSA</Button> */}
             {/* <h4>{farm_id}</h4> */}
             <img mb='100px' style={{maxWidth:'40%', justifyContent:'center', marginBottom:'20px'}} alt='sunny farm' src='https://images.pexels.com/photos/158179/lake-constance-sheep-pasture-sheep-blue-158179.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'></img>
             {/* <h1>{farmData.farm_name}</h1> */}
-            <div maxWidth='m' align='center' style={{justifyContent:'center'}}>
+            <Container maxWidth='m' align='center' style={{justifyContent:'center'}}>
                 <Typography gutterBottom gutterTop variant='h2'>{farmData.farm_name}</Typography>
                 <Typography variant='h5'>Location: {farmData.city}, {farmData.state}</Typography>
                 <Typography gutterBottom variant='h6'>Phone: {farmData.phone}</Typography>
                 <Typography maxWidth='50%' variant='body1' >About Us: {farmData.farm_bio}</Typography>
                 <Typography gutterTop gutterBottom variant='h6' >Available shares: {farmData.max_shares}</Typography>
                 <Button onClick={()=>subscribeToCsa()}variant='contained' style={{marginBottom:'50px'}}>Join this CSA</Button>
-            </div>
+            </Container>
             
             {/* <h3>Phone: {farmData.phone}</h3>
             <h4>Location: {farmData.city}, {farmData.state}</h4>
@@ -142,7 +156,7 @@ const FarmProfile = () => {
                 Return to browsing all CSAs
             </Link> */}
             <Button mb='200px' onClick={()=>navigate('/browse')}>Return to browsing</Button>
-        </div>
+        </Container>
     )
 }
 

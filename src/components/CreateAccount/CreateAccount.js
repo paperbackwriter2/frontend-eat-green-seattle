@@ -120,7 +120,7 @@ export default function CreateAccount() {
                 <br />
 
                 <input
-                    type='text'
+                    type='password'
                     placeholder='Password'
                     name='password'
                     onChange={handleChangeEvent}

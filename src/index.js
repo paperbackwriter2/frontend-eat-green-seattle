@@ -8,14 +8,7 @@ import {
 
 import './index.css';
 import App from './App';
-import Login from './components/Login/Login'
-import Browse from './components/Browse/Browse'
-import About from './components/About/About'
-// import AddFarm from './components/AddFarm/AddFarm'
-import CreateAccount from './components/CreateAccount/CreateAccount'
-import { AuthProvider } from './contexts/AuthContext'
 
-import Navbar from './components/Navbar/Navbar'
 
 // import reportWebVitals from './reportWebVitals';
 

@@ -4,6 +4,8 @@ import { auth } from '../../firebase-config';
 import { UserContext } from '../../UserContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom'
+import { Typography, Button } from '@mui/material';
+import './Login.css'
 
 export default function Login() {
 
@@ -48,7 +50,7 @@ export default function Login() {
     }
     return(
         <div className='login-wrapper'>
-            <h1>Log In</h1>
+            <Typography variant='h6'>Log In</Typography>
             <form onSubmit={handleSubmit}>
                 <input
                     type='text'
@@ -56,6 +58,7 @@ export default function Login() {
                     name='email'
                     value={formData.email}
                     onChange={handleChange}
+                    className='input'
                 />
                 <br />
                 <input
@@ -64,9 +67,11 @@ export default function Login() {
                     name='password'
                     onChange={handleChange}
                     value={formData.password}
+                    className='input'
                 />
                 <div>
-                    <button type='submit'>Sign in</button>
+                    <button className='btn' type='submit'>Sign in</button>
+                    {/* <Button variant='contained'>Sign in</Button> */}
                 </div>
                 {/* <h5>New User? <a href='/create-account'>Create an account</a></h5> */}
                 <h5>New User? <Link to='/create-account'>Create an account</Link></h5>
