@@ -23,3 +23,6 @@ their membership through their dashboard.
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "mongoose": "^6.2.0"
+
+
+I was not able to finish deploying this app to Heroku as planned.
